@@ -74,4 +74,4 @@ public class AuthServlet extends HttpServlet {
         } catch (SQLException e) { throw new ServletException("Database connection failed.", e); }
     }
     private String value(HttpServletRequest r, String k) { String v = r.getParameter(k); return v == null ? "" : v.trim(); }
-} could please change and give it to me
+} 
