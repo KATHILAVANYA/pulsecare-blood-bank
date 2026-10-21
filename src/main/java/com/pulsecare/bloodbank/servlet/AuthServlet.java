@@ -46,7 +46,7 @@ public class AuthServlet extends HttpServlet {
                 }
             }
             req.setAttribute("error", "Invalid email or password.");
-            req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/login.jsp").forward(req, resp);
         } catch (SQLException e) { throw new ServletException("Database connection failed. Check DB_URL, DB_USER, DB_PASSWORD and schema.sql.", e); }
     }
 
