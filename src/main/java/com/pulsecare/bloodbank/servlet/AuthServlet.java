@@ -54,7 +54,7 @@ public class AuthServlet extends HttpServlet {
         String name = value(req, "fullName"), email = value(req, "email").toLowerCase(), password = req.getParameter("password");
         if (name.isBlank() || !email.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$") || password == null || password.length() < 8) {
             req.setAttribute("error", "Enter a name, valid email, and password with at least 8 characters.");
-            req.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(req, resp); return;
+            req.getRequestDispatcher("/WEB-INF/register.jsp").forward(req, resp); return;
         }
         try (Connection c = DB.getConnection()) {
             c.setAutoCommit(false);
@@ -68,7 +68,7 @@ public class AuthServlet extends HttpServlet {
                 }
                 c.commit();
                 req.setAttribute("success", "Account created. You can now sign in.");
-                req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
+                req.getRequestDispatcher("/WEB-INF/login.jsp").forward(req, resp);
             } catch (SQLException e) { c.rollback(); req.setAttribute("error", "Could not create account. The email may already be registered."); req.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(req, resp); }
             finally { c.setAutoCommit(true); }
         } catch (SQLException e) { throw new ServletException("Database connection failed.", e); }
