@@ -21,7 +21,7 @@ public class AuthServlet extends HttpServlet {
         if ("/".equals(path) && req.getSession(false) != null && req.getSession(false).getAttribute("userId") != null) {
             resp.sendRedirect(req.getContextPath() + "/dashboard"); return;
         }
-        req.getRequestDispatcher("/WEB-INF/views/" + ("/register".equals(path) ? "register.jsp" : "login.jsp")).forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/" + ("/register".equals(path) ? "register.jsp" : "login.jsp")).forward(req, resp);
     }
 
     @Override protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
