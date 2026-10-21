@@ -21,7 +21,7 @@ public class AuthServlet extends HttpServlet {
         if ("/".equals(path) && req.getSession(false) != null && req.getSession(false).getAttribute("userId") != null) {
             resp.sendRedirect(req.getContextPath() + "/dashboard"); return;
         }
-        req.getRequestDispatcher("/WEB-INF/views/" + ("/register".equals(path) ? "register.jsp" : "login.jsp")).forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/" + ("/register".equals(path) ? "register.jsp" : "login.jsp")).forward(req, resp);
     }
 
     @Override protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -69,7 +69,7 @@ public class AuthServlet extends HttpServlet {
                 c.commit();
                 req.setAttribute("success", "Account created. You can now sign in.");
                 req.getRequestDispatcher("/WEB-INF/login.jsp").forward(req, resp);
-            } catch (SQLException e) { c.rollback(); req.setAttribute("error", "Could not create account. The email may already be registered."); req.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(req, resp); }
+            } catch (SQLException e) { c.rollback(); req.setAttribute("error", "Could not create account. The email may already be registered."); req.getRequestDispatcher("/WEB-INF/register.jsp").forward(req, resp); }
             finally { c.setAutoCommit(true); }
         } catch (SQLException e) { throw new ServletException("Database connection failed.", e); }
     }
