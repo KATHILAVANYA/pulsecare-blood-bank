@@ -33,7 +33,7 @@ public class DonorServlet extends HttpServlet {
                 String sql="INSERT INTO donors(full_name,email,phone,date_of_birth,gender,blood_group,address) VALUES(?,?,?,?,?,?,?)";
                 try(PreparedStatement p=c.prepareStatement(sql)){
                     p.setString(1,name.trim());p.setString(2,(email==null||email.isBlank())?null:email.trim());p.setString(3,phone.trim());
-                    if(dob==null||dob.isBlank())p.setNull(4,Types.DATE);else p.setDate(4,Date.valueOf(dob));
+                    if(dob==null||dob.isBlank())p.setNull(4,Types.DATE);else p.setDate(4,java.sql.Date.valueOf(dob));
                     p.setString(5,gender);p.setString(6,group);p.setString(7,address);p.executeUpdate();
                 }
             }
